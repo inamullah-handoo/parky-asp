@@ -17,42 +17,45 @@ namespace ParkyAPI.Repository
         }
         public bool CreateNationalPark(NationalPark nationalPark)
         {
-            throw new NotImplementedException();
+            _db.NationalParks.Add(nationalPark);
+            return Save();
         }
 
         public bool DeleteNationalPark(NationalPark nationalPark)
         {
-            throw new NotImplementedException();
+            _db.NationalParks.Remove(nationalPark);
+            return Save();
         }
 
         public NationalPark GetNationalPark(int nationalParkId)
         {
-            throw new NotImplementedException();
+            return _db.NationalParks.Find(nationalParkId);
         }
 
         public ICollection<NationalPark> GetNationalParks()
         {
-            throw new NotImplementedException();
+            return _db.NationalParks.OrderBy(a=>a.Name).ToList();
         }
 
         public bool NationalParkExist(string name)
         {
-            throw new NotImplementedException();
+            return _db.NationalParks.Any(a=>a.Name.ToLower().Trim()==name.ToLower().Trim());
         }
 
         public bool NationalParkExist(int id)
         {
-            throw new NotImplementedException();
+            return _db.NationalParks.Any(a => a.Id == id);
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return _db.SaveChanges() >= 0 ? true : false;
         }
 
         public bool UpdateNationalPark(NationalPark nationalPark)
         {
-            throw new NotImplementedException();
+            _db.NationalParks.Update(nationalPark);
+            return Save();
         }
     }
 }
