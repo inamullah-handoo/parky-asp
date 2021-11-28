@@ -11,13 +11,16 @@ using System.Threading.Tasks;
 
 namespace ParkyAPI.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/nationalParks")]
     [ApiController]
+    //[ApiExplorerSettings(GroupName = "ParkyOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class NationalParksController : Controller
     {
-        private INationalParkRepository _npRepo;
+        private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
 
         public NationalParksController(INationalParkRepository npRepo, IMapper mapper)
@@ -80,7 +83,7 @@ namespace ParkyAPI.Controllers
                 ModelState.AddModelError("", "Something went wrong while saving!");
                 return StatusCode(500, ModelState);
             }
-            return CreatedAtRoute("GetNationalPark", new { nationalParkId = obj.Id }, obj);
+            return CreatedAtRoute("GetNationalPark", new { version=HttpContext.GetRequestedApiVersion().ToString(), nationalParkId = obj.Id }, obj);
         }
 
         [HttpPatch("{id:int}", Name = "UpdateNationalPark")]
@@ -120,4 +123,5 @@ namespace ParkyAPI.Controllers
             return NoContent();
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
