@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkyAPI.Models.Dto
+namespace ParkyWeb.Models
 {
-    public class NationalParkDto
+    public class NationalPark
     {
         public int Id { get; set; }
         [Required]

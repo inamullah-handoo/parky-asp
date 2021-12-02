@@ -64,6 +64,28 @@ namespace ParkyAPI.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// Get trails in national park
+        /// </summary>
+        /// <param name="npId">The ID of the national park</param>
+        /// <returns></returns>
+        [HttpGet("[action]/{npId:int}", Name = "GetTrailsInNP")]
+        //[HttpGet("getTrailInNP/{npId:int}", Name = "GetTrailsInNP")]
+        public IActionResult GetTrailsInNP(int npId)
+        {
+            var objList = _trailRepo.GetTrailsInNationalPark(npId);
+            if (objList == null)
+            {
+                return NotFound();
+            }
+            var objDto = new List<TrailDto>();
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<TrailDto>(obj));
+            }
+            return Ok(objDto);
+        }
+
         [HttpPost]
         [ProducesResponseType(201, Type= typeof(TrailUpsertDto))]
         public IActionResult CreateTrail([FromBody]TrailUpsertDto trailDto)
