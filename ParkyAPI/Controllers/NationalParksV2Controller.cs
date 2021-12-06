@@ -19,7 +19,7 @@ namespace ParkyAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public class NationalParksV2Controller : Controller
+    public class NationalParksV2Controller : ControllerBase
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;

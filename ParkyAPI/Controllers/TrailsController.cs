@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.Models;
@@ -18,7 +19,7 @@ namespace ParkyAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public class TrailsController : Controller
+    public class TrailsController : ControllerBase
     {
         private readonly ITrailRepository _trailRepo;
         private readonly IMapper _mapper;
@@ -53,6 +54,7 @@ namespace ParkyAPI.Controllers
         /// <param name="trailId">The ID of the trail</param>
         /// <returns></returns>
         [HttpGet("{trailId:int}", Name = "GetTrail")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetTrail(int trailId)
         {
             var obj = _trailRepo.GetTrail(trailId);

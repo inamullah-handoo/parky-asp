@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.Models;
@@ -18,7 +19,7 @@ namespace ParkyAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public class NationalParksController : Controller
+    public class NationalParksController : ControllerBase
     {
         private readonly INationalParkRepository _npRepo;
         private readonly IMapper _mapper;
@@ -53,6 +54,7 @@ namespace ParkyAPI.Controllers
         /// <param name="nationalParkId">The ID of the national park</param>
         /// <returns></returns>
         [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
+        [Authorize]
         public IActionResult GetNationalPark(int nationalParkId)
         {
             var obj = _npRepo.GetNationalPark(nationalParkId);

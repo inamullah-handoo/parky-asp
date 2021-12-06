@@ -1,5 +1,5 @@
-﻿using ParkyWeb.Repository.IRepository;
-using ParkyWeb.Models;
+﻿using ParkyWeb.Models;
+using ParkyWeb.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
